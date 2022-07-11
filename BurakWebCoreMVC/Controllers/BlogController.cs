@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BusinessLayer.Concrete;
+using DataAccessLayer.EntityFramework;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +10,17 @@ namespace BurakWebCoreMVC.Controllers
 {
     public class BlogController : Controller
     {
+        BlogManager bm = new(new EfBlogRepository());
         public IActionResult Index()
         {
-            return View();
+            var values = bm.GetBlogListWithCategory();
+            return View(values);
+        }
+        public IActionResult BlogReadAll(int id)
+        {
+            ViewBag.i = id;
+            var values = bm.GetBlogByID(id);
+            return View(values);
         }
     }
 }
