@@ -1,6 +1,9 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +27,22 @@ namespace BurakWebCoreMVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+             //hoca AddSession u sildi ama bende hata veriyor. Program.cs den kaynaklandýðýný söylemiþ bir arkadaþ.
+            services.AddSession();
+
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                           .RequireAuthenticatedUser()
+                           .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
+
+            services.AddMvc();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x=> {
+                x.LoginPath = "/Login/Index";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +63,10 @@ namespace BurakWebCoreMVC
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseAuthentication();
+
+            app.UseSession();
 
             app.UseRouting();
 
