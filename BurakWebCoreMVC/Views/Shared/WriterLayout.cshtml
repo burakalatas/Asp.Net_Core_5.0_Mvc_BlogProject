@@ -66,7 +66,7 @@
                             </a>
                         </div>
                     </li>
-                    <li class="nav-item d-none d-lg-block full-screen-link">
+                    <li class="nav-item d-none d-lg-block full-screen-link" style="cursor:pointer;">
                         <a class="nav-link">
                             <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
                         </a>
@@ -76,7 +76,7 @@
                             <i class="mdi mdi-email-outline"></i>
                             <span class="count-symbol bg-warning"></span>
                         </a>
-                        @await Component.InvokeAsync("WriterMessageNotification") 
+                        @await Component.InvokeAsync("WriterMessageNotification")
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
@@ -104,7 +104,7 @@
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <!-- partial:../../partials/_sidebar.html -->
-            @await Html.PartialAsync("~/Views/Writer/WriterNavbarPartial.cshtml") 
+            @await Html.PartialAsync("~/Views/Writer/WriterNavbarPartial.cshtml")
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
@@ -122,12 +122,15 @@
     <script src="~/writer/assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
+    <script src="~/writer/assets/vendors/chart.js/Chart.min.js"></script>
     <!-- End plugin js for this page -->
     <!-- inject:js -->
     <script src="~/writer/assets/js/off-canvas.js"></script>
     <script src="~/writer/assets/js/hoverable-collapse.js"></script>
     <script src="~/writer/assets/js/misc.js"></script>
     <!-- endinject -->
+    <script src="~/writer/assets/js/dashboard.js"></script>
+    <script src="~/writer/assets/js/todolist.js"></script>
     <!-- Custom js for this page -->
     <!-- End custom js for this page -->
 </body>

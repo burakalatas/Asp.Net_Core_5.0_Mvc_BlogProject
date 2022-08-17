@@ -28,7 +28,7 @@ namespace BurakWebCoreMVC.Controllers
             {
                 p.WriterStatus = true;
                 p.WriterAbout = "Deneme test";
-                wm.WriterAdd(p);
+                wm.Add(p);
                 return RedirectToAction("Index", "Blog");
             }
             else
