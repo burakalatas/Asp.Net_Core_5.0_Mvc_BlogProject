@@ -12,7 +12,7 @@ namespace DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=.;database=CoreBlogDb; integrated security=true;");
+            optionsBuilder.UseSqlServer("server=DESKTOP-MJ87N70\\SQLEXPRESS; database=CoreBlogDb; integrated security=true;");
         }
         public DbSet<About> Abouts { get; set; }
         public DbSet<Blog> Blogs { get; set; }
@@ -22,6 +22,7 @@ namespace DataAccessLayer.Concrete
         public DbSet<Writer> Writers { get; set; }
         public DbSet<Newsletter> Newsletters { get; set; }
         public DbSet<BlogRating> BlogRatings { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
     }
 }
