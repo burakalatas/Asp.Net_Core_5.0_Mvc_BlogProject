@@ -10,12 +10,13 @@ namespace BurakWebCoreMVC.Controllers
 {
     public class DashboardController : Controller
     {
-        [AllowAnonymous]
         public IActionResult Index()
         {
             Context c = new();
+            var usermail = User.Identity.Name;
+            var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
             ViewBag.v1 = c.Blogs.Count();
-            ViewBag.v2 = c.Blogs.Where(x => x.WriterID == 1).Count();
+            ViewBag.v2 = c.Blogs.Where(x => x.WriterID == writerID).Count();
             ViewBag.v3 = c.Categories.Count();
             return View();
         }

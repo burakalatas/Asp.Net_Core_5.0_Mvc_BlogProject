@@ -1,6 +1,7 @@
 ﻿using BurakWebCoreMVC.Models;
 using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
@@ -14,12 +15,16 @@ using System.Threading.Tasks;
 
 namespace BurakWebCoreMVC.Controllers
 {
-    [AllowAnonymous]
     public class WriterController : Controller
     {
-        WriterManager wm = new(new EfWriterRepository()); 
+        WriterManager wm = new(new EfWriterRepository());
         public IActionResult Index()
         {
+            var usermail = User.Identity.Name;
+            ViewBag.v = usermail;
+            Context c = new Context();
+            var writerName = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterName).FirstOrDefault();
+            ViewBag.writerName = writerName;
             return View();
         }
         public IActionResult Test()
@@ -37,7 +42,10 @@ namespace BurakWebCoreMVC.Controllers
         [HttpGet]
         public IActionResult WriterEditProfile()
         {
-            var writervalues = wm.GetById(1);
+            Context c = new();
+            var usermail = User.Identity.Name;
+            var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
+            var writervalues = wm.GetById(writerID);
             return View(writervalues);
         }
         [HttpPost]

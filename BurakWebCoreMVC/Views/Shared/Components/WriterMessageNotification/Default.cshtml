@@ -1,20 +1,21 @@
 ﻿@using EntityLayer.Concrete
-@model List<Message>
+@model List<Message2>
 
 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
     <h6 class="p-3 mb-0">Messages</h6>
-    @foreach(var item in Model){
+    @foreach (var item in Model.Where(x => x.MessageStatus == true).OrderByDescending(x => x.MessageID).Take(5))
+    {
         <div class="dropdown-divider"></div>
         <a class="dropdown-item preview-item">
             <div class="preview-thumbnail">
-                <img src="~/writer/assets/images/faces/face4.jpg" alt="image" class="profile-pic">
+                <img src="~/WriterImageFiles/@item.SenderUser.WriterImage" alt="image" class="profile-pic">
             </div>
             <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                <h6 class="preview-subject ellipsis mb-1 font-weight-normal" style="color:black;">@item.Sender</h6>
+                <h6 class="preview-subject ellipsis mb-1 font-weight-normal" style="color:black;">@item.SenderUser.WriterName sana bir mesaj gönderdi</h6>
                 <p class="text-gray mb-0"> @item.MessageDate.ToShortDateString() </p>
             </div>
         </a>
     }
     <div class="dropdown-divider"></div>
-    <h6 class="p-3 mb-0 text-center">3 Yeni Mesaj</h6>
+    <h6 class="p-3 mb-0 text-center">Tüm mesajları gör</h6>
 </div>
