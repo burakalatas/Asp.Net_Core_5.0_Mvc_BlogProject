@@ -61,7 +61,7 @@
                                 <li>
                                     <div class="dropdown-messages-box">
                                         <a class="dropdown-item float-left" href="profile.html">
-                                            <img alt="image" class="rounded-circle" src="img/a4.jpg">
+                                            <img alt="image" class="rounded-circle" src="~/inspinia-gh-pages/img/a4.jpg">
                                         </a>
                                         <div class="media-body ">
                                             <small class="float-right text-navy">5h ago</small>
@@ -74,7 +74,7 @@
                                 <li>
                                     <div class="dropdown-messages-box">
                                         <a class="dropdown-item float-left" href="profile.html">
-                                            <img alt="image" class="rounded-circle" src="img/profile.jpg">
+                                            <img alt="image" class="rounded-circle" src="~/inspinia-gh-pages/img/profile.jpg">
                                         </a>
                                         <div class="media-body ">
                                             <small class="float-right">23h ago</small>
@@ -148,16 +148,16 @@
             </div>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Static Tables</h2>
+                    <h2>İstatistikler</h2>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="index.html">Home</a>
+                            <a href="">Dashboard</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a>Tables</a>
+                            <a>Tablolar</a>
                         </li>
                         <li class="breadcrumb-item active">
-                            <strong>Static Tables</strong>
+                            <strong>Widgets</strong>
                         </li>
                     </ol>
                 </div>
@@ -179,9 +179,8 @@
         </div>
     </div>
 
-
-
     <!-- Mainly scripts -->
+    <script src="~/inspinia-gh-pages/js/jquery-2.1.1.js"></script>
     <script src="~/inspinia-gh-pages/js/jquery-3.1.1.min.js"></script>
     <script src="~/inspinia-gh-pages/js/popper.min.js"></script>
     <script src="~/inspinia-gh-pages/js/bootstrap.js"></script>
@@ -209,6 +208,7 @@
             });
         });
     </script>
+    @await RenderSectionAsync("scripts")
 
 </body>
 
