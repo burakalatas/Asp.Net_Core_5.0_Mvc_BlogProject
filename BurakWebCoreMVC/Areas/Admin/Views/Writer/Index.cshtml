@@ -7,7 +7,10 @@
 <h1>Yazar Ajax İşlemleri</h1>
 <br />
 <button type="button" id="btngetlist" class="btn btn-outline-primary">Yazar Listesi</button>
-<button type="button" id="btngetbyid" class="btn btn-outline-success">Yazar Getir</button>
+<button type="button" id="btngetbyid" class="btn btn-outline-success">Yazar Getir (ID)</button>
+<button type="button" id="btnaddwriter" class="btn btn-outline-info">Yazar Ekle</button>
+<button type="button" id="btndeletewriter" class="btn btn-outline-danger">Yazar Sil (ID)</button>
+<button type="button" id="btnupdatewriter" class="btn btn-outline-warning">Yazar Güncelle</button>
 <br /><br />
 <div id="writerlist">
 
@@ -18,8 +21,11 @@
 </div>
 <br />
 <div>
-    <input type="text" id="writerid" placeholder="Yazar ID" class="form-control"/>
+    <input type="text" class="form-control" id="txtWriterid" placeholder="Yazar ID" />
+    <input type="text" class="form-control" id="txtWritername" placeholder="Yazar Adı" />
 </div>
+
+
 @section scripts{
     <script>
         $("#btngetlist").click(function () {
@@ -42,7 +48,7 @@
         });
 
         $("#btngetbyid").click(x=>{
-            let id=$("#writerid").val();
+            let id = $("#txtWriterid").val();
             $.ajax({
                 contentType:"application/json",
                 dataType:"json",
@@ -60,6 +66,52 @@
 
             })
         });
+
+        $("#btnaddwriter").click(function () {
+            let writer = {
+                Id: $("#txtWriterid").val(),
+                Name: $("#txtWritername").val()
+            };
+
+            $.ajax({
+                type:"post",
+                url: "/Admin/Writer/AddWriter/",
+                data: writer,
+                success: function (func) {
+                    let result = jQuery.parseJSON(func);
+                    alert("Yazar eklendi");
+                }
+            });
+        });
+
+        $("#btndeletewriter").click(x=>{
+            let id = $("#txtWriterid").val();
+            
+            $.ajax({
+                url: "/Admin/Writer/DeleteWriter/"+id,
+                type:"post",
+                dataType:"json",
+                success: function (func) {
+                    alert("Yazar silindi");
+                }
+            });
+        });
+
+        $("#btnupdatewriter").click(function(){
+            let writer = {
+                Id: $("#txtWriterid").val(),
+                Name: $("#txtWritername").val()
+            };
+
+            $.ajax({
+                type:"post",
+                url:"/Admin/Writer/UpdateWriter/",
+                data:writer,
+                success: function(func){
+                    alert("Yazar Güncellendi");
+                }
+            })
+        })
     </script>
 }
 
