@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace WebCoreAPI.DataAccessLayer
+namespace BlogApi.DataAccessLayer
 {
-    public class Context:DbContext
+    public class Context : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=DESKTOP-MJ87N70\\SQLEXPRESS; database=WebCoreAPI; integrated security=true;");
+            optionsBuilder.UseSqlServer("server=DESKTOP-MJ87N70\\SQLEXPRESS; database=CoreBlogAPI; integrated security=true;");
         }
         public DbSet<Employee> Employees { get; set; }
     }

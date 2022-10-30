@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebCoreAPI.DataAccessLayer
+namespace BlogApi.DataAccessLayer
 {
     public class Employee
     {
