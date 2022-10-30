@@ -1,0 +1,25 @@
+﻿@using BurakWebCoreMVC.Controllers
+@model List<Class1>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Adı Soyadı</th>
+        <th>Düzenle</th>
+        <th>Sil</th>
+    </tr>
+    @foreach(var item in Model){
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td><a href="#" class="btn btn-warning">Düzenle</a></td>
+            <td><a href="#" class="btn btn-danger">Sil</a></td>
+        </tr>
+    }
+</table>
+<a href="/EmployeeTest/AddEmployee/" class="btn btn-outline-primary">Yeni Çalışan Ekle</a>
+
