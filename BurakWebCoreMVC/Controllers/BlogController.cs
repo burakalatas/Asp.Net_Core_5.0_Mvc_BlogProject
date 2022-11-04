@@ -18,11 +18,14 @@ namespace BurakWebCoreMVC.Controllers
     {
         BlogManager bm = new(new EfBlogRepository());
         CategoryManager cm = new(new EfCategoryRepository());
+
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var values = bm.GetBlogListWithCategory();
             return View(values);
         }
+        [AllowAnonymous]
         public IActionResult BlogReadAll(int id)
         {
             ViewBag.i = id;
@@ -32,7 +35,8 @@ namespace BurakWebCoreMVC.Controllers
         public IActionResult BlogListByWriter()
         {
             Context c = new();
-            var usermail = User.Identity.Name;
+            var username = User.Identity.Name;
+            var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
             var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
             var values = bm.GetListWithCategoryByWriterBm(writerID);
             return View(values);
@@ -64,7 +68,8 @@ namespace BurakWebCoreMVC.Controllers
             ViewBag.cv = categoryvalues;
 
             Context c = new();
-            var usermail = User.Identity.Name;
+            var username = User.Identity.Name;
+            var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
             var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
 
             BlogValidator bv = new BlogValidator();
@@ -111,7 +116,8 @@ namespace BurakWebCoreMVC.Controllers
         public IActionResult EditBlog(Blog p)
         {
             Context c = new();
-            var usermail = User.Identity.Name;
+            var username = User.Identity.Name;
+            var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
             var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
 
             var blogvalue = bm.GetById(p.BlogID);

@@ -1,7 +1,7 @@
 ﻿<div class="comment-top">
     <h4>Yorum Yap</h4>
     <div class="comment-bottom">
-        <form action="/Comment/PartialAddComment.cshtml" >
+        <form method="post" asp-action="PartialAddComment" asp-controller="Comment">
             <input class="form-control" type="text" name="CommentUserName" placeholder="Name" required="">
             <input class="form-control" type="text" name="CommentTitle" placeholder="Başlık" required="">
 
@@ -11,4 +11,6 @@
         </form>
     </div>
 </div>
+
+
 
