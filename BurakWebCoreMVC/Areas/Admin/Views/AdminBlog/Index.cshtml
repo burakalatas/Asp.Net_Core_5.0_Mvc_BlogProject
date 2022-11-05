@@ -1,0 +1,53 @@
+﻿@using EntityLayer.Concrete
+@model List<Blog>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+
+<div id="wrapper">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3">
+                <div class="ibox">
+                    <div class="ibox-content product-box">
+
+                        <div>
+                            <img src="@item.BlogImage" class="card-img-top img-fluid">
+                        </div>
+                        <div class="product-desc">
+                            <span class="product-price">
+                                @(((DateTime)item.BlogCreateDate).ToString("dd MMM yyyy"))
+                            </span>
+                            <small class="text-muted">@item.Category.CategoryName</small>
+                            <a href="/Blog/BlogReadAll/@item.BlogID/" class="product-name">@item.BlogTitle</a>
+
+
+
+                            <div class="small m-t-xs">
+                                @(item.BlogContent.Length > 150 ? item.BlogContent.Substring(0, item.BlogContent.Substring(0, 155).LastIndexOf(" ")) + "..." : item.BlogContent + "...")
+                            </div>
+                            <div class="m-t text-righ">
+
+                                <a href="/Blog/BlogReadAll/@item.BlogID/" class="btn btn-xs btn-outline btn-primary">Detaylar <i class="fa fa-long-arrow-right"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+
+    </div>
+</div>
+
+<!-- Custom and plugin javascript -->
+<script src="js/inspinia.js"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
+
+
+

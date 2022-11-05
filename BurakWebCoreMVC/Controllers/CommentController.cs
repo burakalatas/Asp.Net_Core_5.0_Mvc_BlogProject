@@ -37,5 +37,11 @@ namespace BurakWebCoreMVC.Controllers
             var values = cm.GetList(id);
             return PartialView(values);
         }
+        public IActionResult CommentDelete(int id)
+        {
+            var value = cm.GetById(id);
+            cm.CommentDelete(value);
+            return RedirectToAction("Index", "AdminComment", new { area = "Admin" });
+        }
     }
 }
