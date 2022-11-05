@@ -20,7 +20,7 @@ namespace BusinessLayer.Concrete
 
         public void Add(Message2 t)
         {
-            throw new NotImplementedException();
+           _message2Dal.Insert(t);
         }
 
         public void Delete(Message2 t)
@@ -35,12 +35,17 @@ namespace BusinessLayer.Concrete
 
         public List<Message2> GetInboxListByWriter(int id)
         {
-            return _message2Dal.GetListWithMessageByWriter(id);
+            return _message2Dal.GetInboxWithMessageByWriter(id);
         }
 
         public List<Message2> GetList()
         {
             return _message2Dal.GetListAll();
+        }
+
+        public List<Message2> GetSendBoxListByWriter(int id)
+        {
+            return _message2Dal.GetSendBoxWithMessageByWriter(id);
         }
 
         public void Update(Message2 t)

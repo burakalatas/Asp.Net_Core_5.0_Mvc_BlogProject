@@ -1,0 +1,28 @@
+﻿@model EntityLayer.Concrete.Message2
+@{
+    ViewData["Title"] = "SendMessage";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<div style="display:flex; justify-content:space-between;">
+    <h1>Yeni Mesaj Oluştur</h1>
+    <a href="~/Message/Inbox" class="btn btn-primary"><i class="mdi mdi-keyboard-backspace"></i> Geri Dön</a>
+</div>
+<br />
+
+@using (Html.BeginForm("SendMessage", "Message", FormMethod.Post))
+{
+    @Html.Label("Alıcı")
+    @*@Html.TextBoxFor(x => x.Subject, new { @class = "form-control" })*@
+    <input type="text" class="form-control"/>
+    <br />
+    @Html.Label("Konu")
+    @Html.TextBoxFor(x => x.Subject, new { @class = "form-control" })
+    <br />
+    @Html.Label("Mesaj")
+    @Html.TextAreaFor(x => x.MessageDetails, 10, 10, new { @class = "form-control" })
+    <br />
+    <div style="display:flex; justify-content:end; padding-right:1em;"><button class="btn btn-primary">Gönder</button></div>
+
+}
+

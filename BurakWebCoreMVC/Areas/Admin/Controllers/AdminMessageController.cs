@@ -6,9 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 
-namespace BurakWebCoreMVC.Controllers
+namespace BurakWebCoreMVC.Areas.Admin.Controllers
 {
-    public class MessageController : Controller
+    [Area("Admin")]
+    public class AdminMessageController : Controller
     {
         Message2Manager mm = new Message2Manager(new EfMessage2Repository());
         public IActionResult Inbox()
@@ -30,32 +31,10 @@ namespace BurakWebCoreMVC.Controllers
             var values = mm.GetSendBoxListByWriter(writerID);
             return View(values);
         }
-
-        public IActionResult MessageDetails(int id)
-        {
-            var value = mm.GetById(id);
-
-            return View(value);
-        }
-        [HttpGet]
-        public IActionResult SendMessage()
+        
+        public IActionResult ComposeMessage()
         {
             return View();
-        }
-
-        [HttpPost]
-        public IActionResult SendMessage(Message2 p)
-        {
-            Context c = new Context();
-            var username = User.Identity.Name;
-            var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
-            var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
-            p.SenderID = writerID;
-            p.ReceiverID = 2;
-            p.MessageStatus = true;
-            p.MessageDate = Convert.ToDateTime(DateTime.Now.ToShortDateString());
-            mm.Add(p);
-            return RedirectToAction("Inbox");
         }
     }
 }

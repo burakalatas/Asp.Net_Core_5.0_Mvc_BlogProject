@@ -30,11 +30,17 @@ namespace BurakWebCoreMVC.Controllers
 
         public IActionResult Index()
         {
-            var usermail = User.Identity.Name;
-            ViewBag.v = usermail;
             Context c = new Context();
-            var writerName = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterName).FirstOrDefault();
-            ViewBag.writerName = writerName;
+            var username = User.Identity.Name;
+            var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
+            var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
+            ViewBag.writerName = username;
+
+            //var usermail = User.Identity.Name;
+            //ViewBag.v = usermail;
+            //var writerName = c.Writers.Where(x => x.WriterMail == username).Select(y => y.WriterName).FirstOrDefault();
+            //ViewBag.writerName = writerName;
+
             return View();
         }
         public IActionResult Test()
@@ -43,6 +49,8 @@ namespace BurakWebCoreMVC.Controllers
         }
         public PartialViewResult WriterNavbarPartial()
         {
+            var username = User.Identity.Name;
+            ViewBag.x = username;
             return PartialView();
         }
         public PartialViewResult WriterFooterPartial()

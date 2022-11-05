@@ -24,7 +24,7 @@ namespace BurakWebCoreMVC.Areas.Admin.ViewComponents.Statistics
             string connection = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&mode=xml&lang=tr&units=metric&appid="+api;
             XDocument document = XDocument.Load(connection);
             var x= document.Descendants("temperature").ElementAt(0).Attribute("value").Value;
-            ViewBag.v4 = Math.Ceiling(decimal.Parse(x)/100);
+            ViewBag.v4 = Math.Floor(decimal.Parse(x));
 
             return View();
         }
