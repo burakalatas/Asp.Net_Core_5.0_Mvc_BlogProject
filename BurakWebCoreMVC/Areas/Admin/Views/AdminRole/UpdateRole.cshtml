@@ -1,0 +1,21 @@
+﻿@using BurakWebCoreMVC.Models
+@model RoleUpdateViewModel
+@{
+    ViewData["Title"] = "UpdateRole";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h1>Rol Düzenle</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label>Rol ID</label>
+        <input type="text" name="Id" value="@Model.Id" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Rol Adı</label>
+        <input type="text" name="Name" value="@Model.Name" class="form-control" />
+    </div>
+    <button class="btn btn-success">Güncelle</button>
+</form>
+
