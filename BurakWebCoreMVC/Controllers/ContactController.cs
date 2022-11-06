@@ -18,6 +18,7 @@ namespace BurakWebCoreMVC.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            ViewBag.Username = User.Identity.Name;
             return View();
         }
         [HttpPost]

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace BurakWebCoreMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin,Moderator")]
+    [Authorize(Roles = "Admin")]
     public class AdminRoleController : Controller
     {
         private readonly RoleManager<AppRole> _roleManager;
@@ -27,12 +27,16 @@ namespace BurakWebCoreMVC.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
+            var username = User.Identity.Name;
+            ViewBag.UserName = username;
             var values = _roleManager.Roles.ToList();
             return View(values);
         }
         [HttpGet]
         public IActionResult AddRole()
         {
+            var username = User.Identity.Name;
+            ViewBag.UserName = username;
             return View();
         }
         [HttpPost]
@@ -59,6 +63,8 @@ namespace BurakWebCoreMVC.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult UpdateRole(int id)
         {
+            var username = User.Identity.Name;
+            ViewBag.UserName = username;
             var values = _roleManager.Roles.FirstOrDefault(x => x.Id == id);
             RoleUpdateViewModel model = new RoleUpdateViewModel
             {
@@ -92,12 +98,16 @@ namespace BurakWebCoreMVC.Areas.Admin.Controllers
         }
         public IActionResult UserRoleList()
         {
+            var username = User.Identity.Name;
+            ViewBag.UserName = username;
             var values = _userManager.Users.ToList();
             return View(values);
         }
         [HttpGet]
         public async Task<IActionResult> AssignRole(int id)
         {
+            var username = User.Identity.Name;
+            ViewBag.UserName = username;
             var user = _userManager.Users.FirstOrDefault(x => x.Id == id);
             var roles = _roleManager.Roles.ToList();
 

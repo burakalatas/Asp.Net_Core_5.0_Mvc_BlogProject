@@ -22,29 +22,35 @@ namespace BurakWebCoreMVC.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
+            ViewBag.Username = User.Identity.Name;
             var values = bm.GetBlogListWithCategory();
             return View(values);
         }
         [AllowAnonymous]
         public IActionResult BlogReadAll(int id)
         {
+            ViewBag.Username = User.Identity.Name;
             ViewBag.i = id;
             var values = bm.GetBlogByID(id);
             return View(values);
         }
+        [Authorize(Roles = "Admin,Moderator,Writer")]
         public IActionResult BlogListByWriter()
         {
             Context c = new();
             var username = User.Identity.Name;
             var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
             var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
+            ViewBag.Username = User.Identity.Name;
             var values = bm.GetListWithCategoryByWriterBm(writerID);
             return View(values);
 
         }
+        [Authorize(Roles = "Admin,Moderator,Writer")]
         [HttpGet]
         public IActionResult BlogAdd()
         {
+            ViewBag.Username = User.Identity.Name;
             List<SelectListItem> categoryvalues = (from x in cm.GetList()
                                                    select new SelectListItem
                                                    {
@@ -55,6 +61,7 @@ namespace BurakWebCoreMVC.Controllers
             ViewBag.cv = categoryvalues;
             return View();
         }
+        [Authorize(Roles = "Admin,Moderator,Writer")]
         [HttpPost]
         public IActionResult BlogAdd(Blog p)
         {
@@ -91,13 +98,14 @@ namespace BurakWebCoreMVC.Controllers
             }
             return View();
         }
+        [Authorize(Roles = "Admin,Moderator,Writer")]
         public IActionResult DeleteBlog(int id)
         {
             var blogvalue = bm.GetById(id);
             bm.Delete(blogvalue);
             return RedirectToAction("BlogListByWriter", "Blog");
         }
-
+        [Authorize(Roles = "Admin,Moderator,Writer")]
         [HttpGet]
         public IActionResult EditBlog(int id)
         {
@@ -112,6 +120,7 @@ namespace BurakWebCoreMVC.Controllers
             ViewBag.cv = categoryvalues;
             return View(blogvalue);
         }
+        [Authorize(Roles = "Admin,Moderator,Writer")]
         [HttpPost]
         public IActionResult EditBlog(Blog p)
         {

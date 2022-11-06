@@ -1,10 +1,12 @@
 ﻿using BurakWebCoreMVC.Areas.Admin.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace BurakWebCoreMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,Moderator")]
     public class ChartController : Controller
     {
         public IActionResult Index()

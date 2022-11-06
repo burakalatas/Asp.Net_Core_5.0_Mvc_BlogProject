@@ -3,6 +3,7 @@ using BusinessLayer.ValidationRules;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using X.PagedList;
@@ -10,17 +11,22 @@ using X.PagedList;
 namespace BurakWebCoreMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,Moderator")]
     public class CategoryController : Controller
     {
         CategoryManager cm = new CategoryManager(new EfCategoryRepository());
         public IActionResult Index(int page = 1)
         {
+            var username = User.Identity.Name;
+            ViewBag.UserName = username;
             var values = cm.GetList().ToPagedList(page,8);
             return View(values);
         }
         [HttpGet]
         public IActionResult AddCategory()
         {
+            var username = User.Identity.Name;
+            ViewBag.UserName = username;
             return View();
         }
         [HttpPost]

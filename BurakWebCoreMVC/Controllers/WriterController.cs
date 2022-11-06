@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace BurakWebCoreMVC.Controllers
 {
+    [Authorize(Roles = "Admin,Moderator,Writer")]
     public class WriterController : Controller
     {
         WriterManager wm = new(new EfWriterRepository());
@@ -28,29 +29,10 @@ namespace BurakWebCoreMVC.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
-        {
-            Context c = new Context();
-            var username = User.Identity.Name;
-            var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
-            var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
-            ViewBag.writerName = username;
-
-            //var usermail = User.Identity.Name;
-            //ViewBag.v = usermail;
-            //var writerName = c.Writers.Where(x => x.WriterMail == username).Select(y => y.WriterName).FirstOrDefault();
-            //ViewBag.writerName = writerName;
-
-            return View();
-        }
-        public IActionResult Test()
-        {
-            return View();
-        }
         public PartialViewResult WriterNavbarPartial()
         {
             var username = User.Identity.Name;
-            ViewBag.x = username;
+            ViewBag.Username = username;
             return PartialView();
         }
         public PartialViewResult WriterFooterPartial()
@@ -65,6 +47,8 @@ namespace BurakWebCoreMVC.Controllers
             //var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
             //var id = c.Users.Where(x=>x.Email==usermail).Select(y => y.Id).FirstOrDefault();
             //var values =  userManager.GetById(id);
+
+            ViewBag.Username = User.Identity.Name;
 
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
             UserUpdateViewModel model = new UserUpdateViewModel();

@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAcce
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{6A0EBFD4-D4E5-4277-AFAE-5CCD38140818}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreLayer", "CoreLayer\CoreLayer.csproj", "{EEECBD17-F709-4CE8-B687-9DEA49956778}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApi", "BlogApi\BlogApi.csproj", "{5AD0A8A4-8C89-4692-BC20-DC4FD46C16AF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jwt_burak", "jwt_burak\jwt_burak.csproj", "{2C600AAB-C70D-45A1-8E0C-FF59EC871DE2}"
@@ -39,10 +37,6 @@ Global
 		{6A0EBFD4-D4E5-4277-AFAE-5CCD38140818}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A0EBFD4-D4E5-4277-AFAE-5CCD38140818}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A0EBFD4-D4E5-4277-AFAE-5CCD38140818}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EEECBD17-F709-4CE8-B687-9DEA49956778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EEECBD17-F709-4CE8-B687-9DEA49956778}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EEECBD17-F709-4CE8-B687-9DEA49956778}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EEECBD17-F709-4CE8-B687-9DEA49956778}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5AD0A8A4-8C89-4692-BC20-DC4FD46C16AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5AD0A8A4-8C89-4692-BC20-DC4FD46C16AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AD0A8A4-8C89-4692-BC20-DC4FD46C16AF}.Release|Any CPU.ActiveCfg = Release|Any CPU

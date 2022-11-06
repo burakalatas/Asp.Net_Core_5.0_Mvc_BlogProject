@@ -10,6 +10,8 @@ namespace BurakWebCoreMVC.Areas.Admin.Controllers
         CommentManager commentManager = new CommentManager(new EfCommentRepository());
         public IActionResult Index()
         {
+            var username = User.Identity.Name;
+            ViewBag.UserName = username;
             var values = commentManager.GetCommentWithBlog();
             return View(values);
         }

@@ -13,6 +13,7 @@ namespace BurakWebCoreMVC.Controllers
         Message2Manager mm = new Message2Manager(new EfMessage2Repository());
         public IActionResult Inbox()
         {
+            ViewBag.Username = User.Identity.Name;
             Context c = new Context();
             var username = User.Identity.Name;
             var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
@@ -23,6 +24,7 @@ namespace BurakWebCoreMVC.Controllers
 
         public IActionResult SendBox()
         {
+            ViewBag.Username = User.Identity.Name;
             Context c = new Context();
             var username = User.Identity.Name;
             var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
@@ -33,6 +35,7 @@ namespace BurakWebCoreMVC.Controllers
 
         public IActionResult MessageDetails(int id)
         {
+            ViewBag.Username = User.Identity.Name;
             var value = mm.GetById(id);
 
             return View(value);
@@ -40,6 +43,7 @@ namespace BurakWebCoreMVC.Controllers
         [HttpGet]
         public IActionResult SendMessage()
         {
+            ViewBag.Username = User.Identity.Name;
             return View();
         }
 

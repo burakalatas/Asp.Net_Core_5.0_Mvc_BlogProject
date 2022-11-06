@@ -1,4 +1,5 @@
 ﻿using BurakWebCoreMVC.Areas.Admin.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Linq;
 namespace BurakWebCoreMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,Moderator")]
     public class WriterController : Controller
     {
         public IActionResult Index()

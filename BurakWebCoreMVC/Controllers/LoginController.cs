@@ -26,6 +26,7 @@ namespace BurakWebCoreMVC.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Username = User.Identity.Name;
             return View();
         }
 
@@ -37,7 +38,7 @@ namespace BurakWebCoreMVC.Controllers
                 var result = await _signInManager.PasswordSignInAsync(p.username, p.password, false, true);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Dashboard");
+                    return RedirectToAction("Index", "Blog");
                 }
                 else
                 {

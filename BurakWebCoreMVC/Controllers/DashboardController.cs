@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace BurakWebCoreMVC.Controllers
 {
+    [Authorize(Roles = "Admin,Moderator,Writer")]
     public class DashboardController : Controller
     {
         public IActionResult Index()
@@ -16,6 +17,7 @@ namespace BurakWebCoreMVC.Controllers
             var username = User.Identity.Name;
             var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
             var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
+            ViewBag.Username=username;
             ViewBag.v1 = c.Blogs.Count();
             ViewBag.v2 = c.Blogs.Where(x => x.WriterID == writerID).Count();
             ViewBag.v3 = c.Categories.Count();

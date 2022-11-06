@@ -2,6 +2,7 @@
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Linq;
 namespace BurakWebCoreMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,Moderator")]
     public class AdminMessageController : Controller
     {
         Message2Manager mm = new Message2Manager(new EfMessage2Repository());
@@ -16,6 +18,7 @@ namespace BurakWebCoreMVC.Areas.Admin.Controllers
         {
             Context c = new Context();
             var username = User.Identity.Name;
+            ViewBag.Username = username;
             var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
             var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
             var values = mm.GetInboxListByWriter(writerID);
@@ -26,6 +29,7 @@ namespace BurakWebCoreMVC.Areas.Admin.Controllers
         {
             Context c = new Context();
             var username = User.Identity.Name;
+            ViewBag.Username = username;
             var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
             var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
             var values = mm.GetSendBoxListByWriter(writerID);
@@ -34,6 +38,8 @@ namespace BurakWebCoreMVC.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult ComposeMessage()
         {
+            var username = User.Identity.Name;
+            ViewBag.UserName = username;
             return View();
         }
         [HttpPost]

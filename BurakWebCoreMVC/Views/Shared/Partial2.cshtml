@@ -1,13 +1,38 @@
-﻿<div class="col-md-4 top-forms text-center mt-lg-3 mt-md-1 mt-0">
-    <span>Hoşgeldiniz!</span>
-    <span class="mx-lg-4 mx-md-2  mx-1">
-        <a href="/Login/Index">
-            <i class="fas fa-lock"></i> Giriş Yap
-        </a>
-    </span>
-    <span>
-        <a href="/RegisterUser/Index">
-            <i class="far fa-user"></i> Kayıt Ol
-        </a>
-    </span>
+﻿<div class="col-md-6 top-forms text-center mt-lg-3 mt-md-1 mt-0">
+    @if(User.Identity.IsAuthenticated){
+        <span>Hoşgeldin @ViewBag.Username</span>
+    }
+    else
+    {
+        <span>Hoşgeldiniz</span>
+    }
+    @if (User.Identity.IsAuthenticated){
+        if (User.IsInRole("Admin") || User.IsInRole("Moderator") || User.IsInRole("Writer"))
+        {
+            <span class="mx-lg-3 mx-md-2 mx-1">
+                <a href="/Dashboard/Index">
+                    <i class="fas fa-sign-in-alt"></i> Yazar Paneli
+                </a>
+            </span>
+        }
+        <span class="mx-lg-8 mx-md-2 mx-1">
+            <a href="/Login/LogOut">
+                <i class="fas fa-sign-out-alt"></i> Çıkış Yap
+            </a>
+        </span>
+
+    }
+    else
+    {
+        <span class="mx-lg-4 mx-md-2 mx-1">
+            <a href="/Login/Index">
+                <i class="fas fa-lock"></i> Giriş Yap
+            </a>
+        </span>
+        <span>
+            <a href="/RegisterUser/Index">
+                <i class="far fa-user"></i> Kayıt Ol
+            </a>
+        </span>
+    }
 </div>

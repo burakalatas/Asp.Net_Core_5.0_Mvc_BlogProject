@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Static Tables</title>
+    <title>burakalatas.com</title>
 
     <link href="~/inspinia-gh-pages/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/inspinia-gh-pages/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -38,7 +38,7 @@
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li>
-                            <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
+                            <span class="m-r-sm text-muted welcome-message">Welcome to burakalatas.com</span>
                         </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
@@ -138,8 +138,8 @@
 
 
                         <li>
-                            <a href="login.html">
-                                <i class="fa fa-sign-out"></i> Log out
+                            <a href="/Login/LogOut/">
+                                <i class="fa fa-sign-out"></i> Çıkış yap
                             </a>
                         </li>
                     </ul>
@@ -195,4 +195,90 @@
 </body>
 
 </html>
+<script>
+    $("#btngetlist").click(function () {
+        $.ajax({
+            contentType: "application/json",
+            dataType: "json",
+            type: "Get",
+            url: "/Admin/Writer/WriterList/",
+            success: function (func) {
+                let w = jQuery.parseJSON(func);
+                console.log(w);
+                let tablehtml = "<table class='table table-bordered'> <tr><th> Yazar ID</th> <th>                         Yazar Adı</th></tr>";
+                $.each(w, (index, value) => {
+                    tablehtml += `<tr><td>${value.Id}</td> <td>${value.Name}</td></tr>`
+                });
+                tablehtml += "</table>";
+                $("#writerlist").html(tablehtml);
+            }
+        });
+    });
+
+    $("#btngetbyid").click(x => {
+        let id = $("#txtWriterid").val();
+        $.ajax({
+            contentType: "application/json",
+            dataType: "json",
+            type: "Get",
+            url: "/Admin/Writer/GetWriterByID/",
+            data: { writerid: id },
+            success: function (func) {
+                let w = jQuery.parseJSON(func);
+                console.log(w);
+
+                let getvalue = `<table class='table table-bordered'> <tr><th> Yazar ID</th> <th>                         Yazar Adı</th></tr> <tr><td>${w.Id}</td><td>${w.Name}</td></tr></table>`;
+                $("#writerget").html(getvalue);
+
+            }
+
+        })
+    });
+
+    $("#btnaddwriter").click(function () {
+        let writer = {
+            Id: $("#txtWriterid").val(),
+            Name: $("#txtWritername").val()
+        };
+
+        $.ajax({
+            type: "post",
+            url: "/Admin/Writer/AddWriter/",
+            data: writer,
+            success: function (func) {
+                let result = jQuery.parseJSON(func);
+                alert("Yazar eklendi");
+            }
+        });
+    });
+
+    $("#btndeletewriter").click(x => {
+        let id = $("#txtWriterid").val();
+
+        $.ajax({
+            url: "/Admin/Writer/DeleteWriter/" + id,
+            type: "post",
+            dataType: "json",
+            success: function (func) {
+                alert("Yazar silindi");
+            }
+        });
+    });
+
+    $("#btnupdatewriter").click(function () {
+        let writer = {
+            Id: $("#txtWriterid").val(),
+            Name: $("#txtWritername").val()
+        };
+
+        $.ajax({
+            type: "post",
+            url: "/Admin/Writer/UpdateWriter/",
+            data: writer,
+            success: function (func) {
+                alert("Yazar Güncellendi");
+            }
+        })
+    })
+</script>
 

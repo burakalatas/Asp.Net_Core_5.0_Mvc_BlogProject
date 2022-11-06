@@ -1,6 +1,7 @@
 ﻿using BurakWebCoreMVC.Areas.Admin.Models;
 using ClosedXML.Excel;
 using DataAccessLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.IO;
@@ -9,6 +10,7 @@ using System.Linq;
 namespace BurakWebCoreMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,Moderator")]
     public class BlogController : Controller
     {
         public IActionResult ExportStaticExcelBlogList()
@@ -86,6 +88,8 @@ namespace BurakWebCoreMVC.Areas.Admin.Controllers
         }
         public IActionResult BlogTitleListExcel()
         {
+            var username = User.Identity.Name;
+            ViewBag.UserName = username;
             return View();
         }
     }
