@@ -11,6 +11,7 @@ using X.PagedList;
 namespace BurakWebCoreMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Route("Admin/[controller]/[action]/{id?}")]
     [Authorize(Roles = "Admin,Moderator")]
     public class CategoryController : Controller
     {

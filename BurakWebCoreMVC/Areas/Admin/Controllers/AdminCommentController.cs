@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BurakWebCoreMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Route("Admin/[controller]/[action]/{id?}")]
     public class AdminCommentController : Controller
     {
         CommentManager commentManager = new CommentManager(new EfCommentRepository());

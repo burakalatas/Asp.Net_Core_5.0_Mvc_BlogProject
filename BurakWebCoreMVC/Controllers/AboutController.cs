@@ -15,7 +15,6 @@ namespace BurakWebCoreMVC.Controllers
         AboutManager abm = new AboutManager(new EfAboutRepository());
         public IActionResult Index()
         {
-            ViewBag.Username = User.Identity.Name;
             var values = abm.GetList();
             return View(values);
         }

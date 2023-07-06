@@ -4,9 +4,6 @@ using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BurakWebCoreMVC.Controllers
 {
@@ -28,9 +25,8 @@ namespace BurakWebCoreMVC.Controllers
         {
             p.CommentDate = DateTime.Parse(DateTime.Now.ToShortDateString());
             p.CommentStatus = true;
-            p.BlogID = 3;
             cm.CommentAdd(p);
-            return PartialView();
+            return RedirectToAction("BlogReadAll", "Blog", new { id = p.BlogID });
         }
         public PartialViewResult CommentListByBlog(int id)
         {

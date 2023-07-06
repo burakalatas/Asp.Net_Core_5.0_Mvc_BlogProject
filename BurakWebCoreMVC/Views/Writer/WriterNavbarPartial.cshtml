@@ -8,7 +8,7 @@
                     <!--change to offline or busy as needed-->
                 </div>
                 <div class="nav-profile-text d-flex flex-column">
-                    <span class="font-weight-bold mb-2">@ViewBag.Username</span>
+                    <span class="font-weight-bold mb-2">@User.Identity.Name.ToUpperInvariant()</span>
                     <span class="text-secondary text-small">Writer</span>
                 </div>
                 <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
@@ -63,6 +63,18 @@
                 <i class="mdi mdi-car menu-icon"></i>
             </a>
         </li>
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (User.IsInRole("Admin"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Admin/Widget/Index/">
+                        <span class="menu-title">Admin Paneli</span>
+                        <i class="mdi mdi-car menu-icon"></i>
+                    </a>
+                </li>
+            }
+        }
         <li class="nav-item">
             <a class="nav-link" href="~/Writer/WriterEditProfile/">
                 <span class="menu-title">Ayarlar</span>

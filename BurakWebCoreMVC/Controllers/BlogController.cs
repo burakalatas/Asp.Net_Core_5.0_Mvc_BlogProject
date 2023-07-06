@@ -22,14 +22,12 @@ namespace BurakWebCoreMVC.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            ViewBag.Username = User.Identity.Name;
             var values = bm.GetBlogListWithCategory();
             return View(values);
         }
         [AllowAnonymous]
         public IActionResult BlogReadAll(int id)
         {
-            ViewBag.Username = User.Identity.Name;
             ViewBag.i = id;
             var values = bm.GetBlogByID(id);
             return View(values);

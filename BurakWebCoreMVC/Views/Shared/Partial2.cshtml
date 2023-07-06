@@ -1,10 +1,10 @@
 ﻿<div class="col-md-6 top-forms text-center mt-lg-3 mt-md-1 mt-0">
     @if(User.Identity.IsAuthenticated){
-        <span>Hoşgeldin @ViewBag.Username</span>
+        <span>Merhaba, @User.Identity.Name.ToUpperInvariant()</span>
     }
     else
     {
-        <span>Hoşgeldiniz</span>
+        <span>Hoş Geldiniz</span>
     }
     @if (User.Identity.IsAuthenticated){
         if (User.IsInRole("Admin") || User.IsInRole("Moderator") || User.IsInRole("Writer"))
@@ -15,6 +15,15 @@
                 </a>
             </span>
         }
+        if (User.IsInRole("Admin"))
+        {
+            <span class="mx-lg-3 mx-md-2 mx-1">
+                <a href="/Admin/Widget/Index">
+                    <i class="fas fa-sign-in-alt"></i> Admin Paneli
+                </a>
+            </span>
+        }
+
         <span class="mx-lg-8 mx-md-2 mx-1">
             <a href="/Login/LogOut">
                 <i class="fas fa-sign-out-alt"></i> Çıkış Yap
